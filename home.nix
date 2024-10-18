@@ -32,8 +32,15 @@
     rsync
     restic
 
-    # encyption
+    # email
+    aerc
+    notmuch
+    msmtp
+    oama
+
+    # encryption
     gnupg
+    pass
 
     # files and directories
     yazi
