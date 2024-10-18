@@ -83,7 +83,7 @@
     };
   };
  
-# yazi shell scrip
+# yazi shell script
   home.file.".config/helix/yazi-picker.sh" = {
     text = ''
       #!/usr/bin/env bash
