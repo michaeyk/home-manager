@@ -55,6 +55,7 @@
     bemoji
     grim
     slurp
+    swappy
 
     # media
     mpv
@@ -62,6 +63,9 @@
     spotify
     nsxiv
 
+    # messaging
+    gajim
+    
     # productivity
     obsidian
 
