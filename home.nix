@@ -143,6 +143,16 @@
     };
   };
 
+  # email
+  programs.mbsync.enable = true;
+  programs.msmtp.enable = true;
+  programs.notmuch = {
+    enable = true;
+    hooks = {
+      preNew = "mbsync --all";
+    };
+  };
+
   accounts.email = {
     maildirBasePath = ".maildir";
     accounts = {
@@ -183,6 +193,40 @@
       };
     };
   };
+
+  # Define the systemd service
+  systemd.user.services.notmuch-index = {
+    Unit = {
+      Description = "Run notmuch index";
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.notmuch}/bin/notmuch new"; # Command to run
+      Restart = "on-failure"; # Optional: restart on failure
+    };
+    Install = {
+      WantedBy = ["default.target"];
+    };
+  };
+
+  # Define the systemd timer to run the service every 5 minutes
+  systemd.user.timers.notmuch-index = {
+    Unit = {
+      Description = "Run notmuch index every 5 minutes";
+    };
+    Timer = {
+      Unit = "notmuch-index.service";
+      OnCalendar = "*:0/5"; # Every 5 minutes
+      Persistent = true; # Ensures it runs if missed (e.g., after suspend)
+    };
+    Install = {
+      WantedBy = ["timers.target"];
+    };
+  };
+
+  # Ensure the timer starts automatically
+  # systemd.user.services."timers.target".wants = ["notmuch-indexutimer.timer"];
+
   # programs.msmtp.extraConfig =
   # ''
   #   # Set default values for all following accounts.
