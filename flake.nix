@@ -23,6 +23,7 @@
         modules = [ 
           ./home.nix 
           ./helix
+          ./email
         ];
 
         # Optionally use extraSpecialArgs
