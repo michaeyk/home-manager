@@ -35,14 +35,13 @@
     # email
     aerc
     notmuch
-    msmtp
     oama
 
     # encryption
     gnupg
     pass
 
-    # fonts 
+    # fonts
     nerdfonts
 
     # files and directories
@@ -68,10 +67,10 @@
 
     # messaging
     gajim
-    
+
     # pdf
     poppler
-    
+
     # productivity
     obsidian
 
@@ -132,6 +131,70 @@
   # or
   #
   #  /etc/profiles/per-user/mike/etc/profile.d/hm-session-vars.sh
+  programs.git.enable = true;
+
+  accounts.email = {
+    maildirBasePath = ".maildir";
+    accounts = {
+      "personal" = {
+        address = "mike@michaelkim.net";
+        userName = "mike@michaelkim.net";
+        realName = "Michael Kim";
+        signature = {
+          text = ''
+          Michael Kim
+          '';
+          showSignature = "append";
+        };
+        passwordCommand = "${pkgs.pass}/bin/pass show email/mike@michaelkim.net | head -n1";
+        imap.host = "imap.fastmail.com";
+        smtp.host = "smtp.fastmail.com";
+        mbsync = {
+          enable = true;
+          create = "both";
+          expunge = "both";
+          patterns = ["*"];
+          extraConfig = {
+            channel = {
+              Sync = "All";
+            };
+            account = {
+              Timeout = 120;
+              PipelineDepth = 1;
+            };
+          };
+        };
+        msmtp.enable = true;
+        notmuch.enable = true;
+        primary = true;
+      };
+
+      "tsbot" = {
+        
+      };
+    };
+  };
+  # programs.msmtp.extraConfig =
+  # ''
+  #   # Set default values for all following accounts.
+  #   defaults
+  #   auth           on
+  #   tls            on
+  #   tls_trust_file /etc/ssl/certs/ca-certificates.crt
+  #   logfile        ~/.msmtp.log
+
+  #   # A freemail service
+  #   account        fastmail
+  #   host           smtp.fastmail.com
+  #   port           465
+  #   from           mike@michaelkim.net
+  #   user           mike@michaelkim.net
+  #   passwordeval "pass show email/mike@michaelkim.net | head -n1"
+  #   tls_starttls   off
+
+  #   account default : fastmail
+  # '';
+
   programs.zathura.enable = true;
 
   # Let Home Manager install and manage itself.
