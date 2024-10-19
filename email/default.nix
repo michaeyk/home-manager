@@ -1,6 +1,14 @@
-{config, pkgs, theme, ...}:
 {
-  # email
+  config,
+  pkgs,
+  theme,
+  ...
+}: {
+  home.packages = with pkgs; [
+    aerc
+    oama
+  ];
+
   programs.mbsync.enable = true;
   programs.msmtp.enable = true;
   programs.notmuch = {
@@ -47,6 +55,29 @@
       };
 
       "tsbot" = {
+        address = "mike@tsbotfund.com";
+        userName = "mike@tsbotfund.com";
+        realName = "Michael Kim";
+        passwordCommand = "${pkgs.pass}/bin/pass show email/mike@tsbotfund.com | head -n1";
+        imap.host = "imap.gmail.com";
+        smtp.host = "smtp.gmail.com";
+        mbsync = {
+          enable = true;
+          create = "both";
+          expunge = "both";
+          patterns = ["*" "![Gmail]*" "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"];
+          extraConfig = {
+            channel = {
+              Sync = "All";
+            };
+            account = {
+              Timeout = 120;
+              PipelineDepth = 1;
+            };
+          };
+        };
+        msmtp.enable = true;
+        notmuch.enable = true;
       };
     };
   };

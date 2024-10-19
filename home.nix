@@ -32,11 +32,6 @@
     rsync
     restic
 
-    # email
-    aerc
-    notmuch
-    oama
-
     # encryption
     gnupg
     pass
