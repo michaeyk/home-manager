@@ -131,7 +131,17 @@
   # or
   #
   #  /etc/profiles/per-user/mike/etc/profile.d/hm-session-vars.sh
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "Michael Kim";
+    userEmail = "mike@michaelkim.net";
+
+    extraConfig = {
+      core = {
+        editor = "${pkgs.helix}/bin/hx";
+      };
+    };
+  };
 
   accounts.email = {
     maildirBasePath = ".maildir";
@@ -142,7 +152,7 @@
         realName = "Michael Kim";
         signature = {
           text = ''
-          Michael Kim
+            Michael Kim
           '';
           showSignature = "append";
         };
@@ -170,7 +180,6 @@
       };
 
       "tsbot" = {
-        
       };
     };
   };
