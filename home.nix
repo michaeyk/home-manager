@@ -42,6 +42,9 @@
     gnupg
     pass
 
+    # fonts 
+    nerdfonts
+
     # files and directories
     yazi
     fzf
@@ -83,7 +86,7 @@
     # overrides. You can do that directly here, just don't forget the
     # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # fonts?
-    (pkgs.nerdfonts.override {fonts = ["FantasqueSansMono"];})
+    # (pkgs.nerdfonts.override {fonts = ["FantasqueSansMono"];})
 
     # You can also create simple shell scripts directly inside your
     # configuration. For example, this adds a command 'my-hello' to your
@@ -129,6 +132,7 @@
   # or
   #
   #  /etc/profiles/per-user/mike/etc/profile.d/hm-session-vars.sh
+  programs.zathura.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
