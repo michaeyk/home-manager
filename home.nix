@@ -66,6 +66,9 @@
     # messaging
     gajim
     
+    # pdf
+    poppler
+    
     # productivity
     obsidian
 
